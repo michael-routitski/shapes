@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
+	public float Distance;
+
+	public float Height;
+
 	Transform Target;
 
 	Vector3 CamPosition = new Vector3();
@@ -19,7 +23,8 @@ public class CameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		CamPosition.z = Target.transform.position.z - 12f;
+		CamPosition.y = Height;
+		CamPosition.z = Target.transform.position.z - Distance;
 		transform.position = CamPosition;
 
 		LookAtPosition.z = Target.transform.position.z;

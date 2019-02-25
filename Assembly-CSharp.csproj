@@ -53,21 +53,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BarrierBlockController.cs" />
+     <Compile Include="Assets\BarrierController.cs" />
+     <Compile Include="Assets\BarrierGenerator.cs" />
+     <Compile Include="Assets\LevelBarrierManager.cs" />
+     <Compile Include="Assets\LevelController.cs" />
+     <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\Scrips\CameraFollow.cs" />
      <Compile Include="Assets\Scrips\Game.cs" />
+     <Compile Include="Assets\Scrips\Shape.cs" />
      <Compile Include="Assets\Scrips\ShapeControlles.cs" />
      <Compile Include="Assets\Scrips\ShapeSwitchController.cs" />
+     <Compile Include="Assets\Scrips\TransformEx.cs" />
+     <Compile Include="Assets\SegmentManager.cs" />
+     <Compile Include="Assets\ShapeCubeManager.cs" />
+     <Compile Include="Assets\ShapeGenerator.cs" />
+     <Compile Include="Assets\TextureManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>/home/mishar/shapes/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>/home/mishar/Desktop/shapes/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/home/mishar/shapes/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/home/mishar/Desktop/shapes/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/home/mishar/shapes/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/home/mishar/Desktop/shapes/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/home/mishar/shapes/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/home/mishar/Desktop/shapes/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/home/mishar/Unity-2018.2.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

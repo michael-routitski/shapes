@@ -12,21 +12,23 @@ public class ShapeControlles : MonoBehaviour {
 
 	private enum Direciton { Left, Right };
 
-	//int currentSidewaysDirection;
-
 	public float CurrentX = 0;
 
 	public float TargetX = 0;
 
 	public float InputX;
 
+	public float stepX; // 2
+
+	public float boundX; // e.g. 7  as in -7, -5, -3, -1, 1, 3, 5, 7  for the max tracks
+
 	void SetCurrentTarget() { 
 
 		CurrentX = transform.position.x;
 
-		TargetX = (InputX < 0) ? (CurrentX - 3f) : (CurrentX + 3f);
+		TargetX = (InputX < 0) ? (CurrentX - stepX) : (CurrentX + stepX);
 		 
-		TargetX = Mathf.Clamp(TargetX, -6f, 6f);
+		TargetX = Mathf.Clamp(TargetX, -boundX, boundX);
 
 		Debug.Log("Target set at " + TargetX);
 	}
@@ -35,7 +37,6 @@ public class ShapeControlles : MonoBehaviour {
 		finalPosition = transform.position;
 		//currentSidewaysDirection = 0;
 	}
-	
 	
 	float speed = 0.2f;
 
