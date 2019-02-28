@@ -6,26 +6,13 @@ public class ShapeCubeManager : MonoBehaviour {
 
 	Rigidbody rb;
 	
-	
-
 	void Start(){
 		rb = GetComponent<Rigidbody>();
 	}
 
-	void OnCollisionEnter(Collision col){
-		//if (col.collider.CompareTag("Barrier")){
-		//	transform.SetParent(col.collider.transform);
-			//rb.isKinematic = false;
-			//rb.useGravity = true;
-			//rb.AddRelativeForce(0,-10,0, ForceMode.Impulse);
-		//}
-
-	}
-
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Barrier"){
-			SendMessageUpwards("BarrierHit", SendMessageOptions.RequireReceiver);
-			//SendMessageUpwards("DeparentCubes", SendMessageOptions.RequireReceiver);
+			SendMessageUpwards("BarrierHit", SendMessageOptions.DontRequireReceiver);
 			
 			transform.SetParent(other.transform);
 			rb.isKinematic = false;

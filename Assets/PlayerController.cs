@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour {
 
 	bool CanMove = true;
 
+	ShapeGenerator shapeGenerator;
+
 	void InitLanes(){
 		
 		lanesX = new float[NumLanes];
@@ -124,7 +126,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void BarrierHit(){
 		CanMove = false;
-		
+
 		StartCoroutine(BarrierHitCR());
 	}
 
@@ -144,16 +146,17 @@ public class PlayerController : MonoBehaviour {
 		ForwardSpeed = 0;
 
 		//yield return new WaitForSeconds(0.33f);
-
+		SendMessageUpwards("HandleSugarCubeCrash");
 
 		yield return null;
 	}
 
 	// Use this for initialization
-	void Start () {
+	public void Reset () {
 		InitLanes();
 		transform.position = new Vector3(lanesX[currentLaneIndex], transform.position.y, transform.position.z);
 		Shape = transform.Find("Shape");
+		transform.position = new Vector3(0,0,-20f);
 	}
 	
 	// Update is called once per frame

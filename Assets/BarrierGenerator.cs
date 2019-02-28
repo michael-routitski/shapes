@@ -43,6 +43,8 @@ public class BarrierGenerator : MonoBehaviour {
 
 	public int RamdomShapeIndex = -1;
 
+	public int RandomRotationIndex = 0;
+
 	private int[] ShapeIndexSelector;
 
 	public void Generate(){
@@ -50,6 +52,8 @@ public class BarrierGenerator : MonoBehaviour {
 		Release();
 
 		int holeShapeIndex = 0;
+
+		RandomRotationIndex = Random.Range(0,3);
 
 		List<int> availableHoleShapeIndexes = new List<int>(Shape.List.Length);
 		for (int i = 0; i < Shape.List.Length; i++)
@@ -60,16 +64,20 @@ public class BarrierGenerator : MonoBehaviour {
 			holeShapeIndex = availableHoleShapeIndexes[Random.Range(0, availableHoleShapeIndexes.Count - 1)];
 			availableHoleShapeIndexes.Remove(holeShapeIndex);
 
-			GetHole(holeShapeIndex)
-				.transform
-				.ActivateGameObject()
-				.ParentTo(HolesParent)
-				.SetX(GetXFor(laneIndex));
+			var holeT = GetHole(holeShapeIndex).transform;
+				
+			holeT.ParentTo(HolesParent);
+				
+			holeT.ActivateGameObject();
+			holeT.SetX(GetXFor(laneIndex));
+			
+			holeT.RotateZ(90f * RandomRotationIndex);
 
 			ShapeIndexSelector[laneIndex] = holeShapeIndex;
 		}
 
 		RamdomShapeIndex = ShapeIndexSelector[Random.Range(0, ShapeIndexSelector.Length - 1)];
+
 	}
 
 	int GetNextRandomOrdinal(){
@@ -80,9 +88,12 @@ public class BarrierGenerator : MonoBehaviour {
 
  		for (int i = HolesParent.childCount - 1; i >= 0; i--){
 			
+			 //HolesParent.GetChild(i).localPosition = Vector3.zero;
+			HolesParent.GetChild(i).localRotation = Quaternion.identity;
+			HolesParent.GetChild(i).gameObject.SetActive(false);
+
 			Cache[HolesParent.GetChild(i).name].Push(HolesParent.GetChild(i).gameObject);
 
-			HolesParent.GetChild(i).gameObject.SetActive(false);
 		}
 
 		while(HolesParent.childCount > 0){
@@ -107,7 +118,7 @@ public class BarrierGenerator : MonoBehaviour {
 	}
 
 	GameObject GetHole(int ordinal){
-
+		
 		if (Cache[Shape.List[ordinal].PrefabPath].Count > 0){
 			return Cache[Shape.List[ordinal].PrefabPath].Pop();
 		}

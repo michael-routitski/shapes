@@ -38,6 +38,7 @@ public class BarrierController : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player"){
 			shapeGenerator.FormShape(RandomShapeIndex);
+			SendMessageUpwards("HandleSugarCubePass", SendMessageOptions.DontRequireReceiver);
 		}
 	}
 

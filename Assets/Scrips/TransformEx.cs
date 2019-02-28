@@ -17,6 +17,18 @@ public static class TransformEx  {
 		return _this;
 	}
 	
+	public static Transform RotateZ(this Transform _this, float Z){
+
+		_this.Rotate(0, 0, Z);
+		return _this;
+	}
+	
+	public static Transform RotateX(this Transform _this, float X){
+
+		_this.Rotate(X, 0, 0);
+		return _this;
+	}
+	
 	public static Transform SetZ(this Transform _this, float Z){
 
 		_this.localPosition = Vector3.zero;

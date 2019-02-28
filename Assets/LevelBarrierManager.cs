@@ -10,11 +10,9 @@ public class LevelBarrierManager : MonoBehaviour {
 
 	public int StepSpanLength;
 
-	float currentBarrierZ = 0;
+	public float currentBarrierZ = 0;
 	
-	float nextBarrierZ = 0;
-
-	private int CurrentStep;
+	public float nextBarrierZ = 0;
 
 	private GameObject player;
 

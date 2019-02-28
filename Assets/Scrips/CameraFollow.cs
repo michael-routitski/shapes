@@ -14,14 +14,14 @@ public class CameraFollow : MonoBehaviour {
 	Vector3 LookAtPosition = new Vector3();
 
 	// Use this for initialization
-	void Start () {
+	public void Reset () {
 		Target = GameObject.FindGameObjectWithTag("Player").transform;
 		CamPosition = new Vector3(0,4,0);
 		LookAtPosition = new Vector3(0,1,Target.position.z);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void RunUpdate () {
 
 		CamPosition.y = Height;
 		CamPosition.z = Target.transform.position.z - Distance;

@@ -58,12 +58,16 @@
      <Compile Include="Assets\BarrierGenerator.cs" />
      <Compile Include="Assets\LevelBarrierManager.cs" />
      <Compile Include="Assets\LevelController.cs" />
+     <Compile Include="Assets\LevelUIManager.cs" />
+     <Compile Include="Assets\MenuController.cs" />
+     <Compile Include="Assets\MenuUIManager.cs" />
      <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\Scrips\CameraFollow.cs" />
      <Compile Include="Assets\Scrips\Game.cs" />
      <Compile Include="Assets\Scrips\Shape.cs" />
      <Compile Include="Assets\Scrips\ShapeControlles.cs" />
      <Compile Include="Assets\Scrips\ShapeSwitchController.cs" />
+     <Compile Include="Assets\Scrips\State.cs" />
      <Compile Include="Assets\Scrips\TransformEx.cs" />
      <Compile Include="Assets\SegmentManager.cs" />
      <Compile Include="Assets\ShapeCubeManager.cs" />
