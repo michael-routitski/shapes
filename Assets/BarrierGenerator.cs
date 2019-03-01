@@ -6,7 +6,7 @@ public class BarrierGenerator : MonoBehaviour {
 
 	const float BlockWidth = 2f;
 
-	public int NumLanes;
+	int NumLanes;
 
 	public int Step;
 
@@ -14,31 +14,20 @@ public class BarrierGenerator : MonoBehaviour {
 
 	public bool NeedsReleasing;
 
-	// static readonly string[] PrefabPaths = {
-	// 	"Holes/hole_1",
-	// 	"Holes/hole_2",
-	// 	"Holes/hole_3",
-	// 	"Holes/hole_4",
-	// 	"Holes/hole_5",
-	// 	"Holes/hole_6",
-	// 	"Holes/hole_7",
-	// 	"Holes/hole_8",
-	// };
- 
 	private static Dictionary<string, Stack<GameObject>> Cache;
 
 	private Transform HolesParent;
 
-	void OnGUI(){
-		if (NeedsReleasing){
-			NeedsReleasing = false;
-			Release();
-		}
+	// Use this for initialization
+	public void Reset (int numLanes) {
+		SetNumLanes(numLanes);
+		InitCache();
+		HolesParent = transform.Find("Holes");
+		ShapeIndexSelector = new int[NumLanes];
+	}
 
-		if (NeedsGenerating){
-			NeedsGenerating = false;
-			Generate();
-		}
+	public void SetNumLanes(int lanes){
+		NumLanes = lanes;
 	}
 
 	public int RamdomShapeIndex = -1;
@@ -141,10 +130,4 @@ public class BarrierGenerator : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
-	void Awake () {
-		InitCache();
-		HolesParent = transform.Find("Holes");
-		ShapeIndexSelector = new int[NumLanes];
-	}
 }

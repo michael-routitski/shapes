@@ -13,10 +13,20 @@ public class BarrierController : MonoBehaviour {
 	ShapeGenerator shapeGenerator;
 
 	// Use this for initialization
-	void Awake () {
-		generator = GetComponent<BarrierGenerator>();
-		ShapeReformTrigger = GetComponent<BoxCollider>();
-		shapeGenerator = GameObject.FindWithTag("Player").GetComponentInChildren<ShapeGenerator>();
+	public void Reset (int numLanes) {
+		if (!generator){
+			generator = GetComponent<BarrierGenerator>();
+		}
+		
+		generator.Reset(numLanes);
+
+		if (!ShapeReformTrigger){
+			ShapeReformTrigger = GetComponent<BoxCollider>();
+		}
+		
+		if (!shapeGenerator){
+			shapeGenerator = GameObject.FindWithTag("Player").GetComponentInChildren<ShapeGenerator>();
+		}
 	}
 	
 	public void Regenerate(float stepSpanLength){
@@ -31,8 +41,8 @@ public class BarrierController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
-		
+	public void SetNumLanes (int numLanes) {
+		generator.SetNumLanes(numLanes);
 	}
 
 	void OnTriggerEnter(Collider other){

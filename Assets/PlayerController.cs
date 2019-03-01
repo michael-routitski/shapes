@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-
-	public int NumLanes;
+ 	int NumLanes;
 
 	public float ForwardSpeed;
+
+	float currentForwardSpeed;
 
 	float[] lanesX;
 
@@ -25,11 +26,14 @@ public class PlayerController : MonoBehaviour {
 
 	public bool IsRotationInProgress = false;
 
-	Transform Shape;
-
 	bool CanMove = true;
 
-	ShapeGenerator shapeGenerator;
+	ShapeGenerator shape;
+
+	public void SetNumLanes(int lines){
+		NumLanes = lines;
+		InitLanes();
+	}
 
 	void InitLanes(){
 		
@@ -46,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 	}
  
 	void MoveForward(){
-		transform.Translate(0, 0, ForwardSpeed);
+		transform.Translate(0, 0, currentForwardSpeed);
 	}
 
 	void Rotate(){
@@ -64,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 
 		for (int i=0; i<NumHorizontalSteps; i++){	
 
-			Shape.transform.Rotate(0, 0, stepZ);
+			shape.transform.Rotate(0, 0, stepZ);
 			
 			yield return new WaitForFixedUpdate();
 		}
@@ -132,18 +136,16 @@ public class PlayerController : MonoBehaviour {
 
 	IEnumerator BarrierHitCR(){
 
-		
-
 		GetComponentInChildren<ShapeGenerator>().DeparentCubes(50f);
 
 		float haltSpeed = Random.Range(0.1f, 0.18f);
 
-		while(ForwardSpeed > 0.001){
-			ForwardSpeed = Mathf.Lerp(ForwardSpeed, 0, haltSpeed);
+		while(currentForwardSpeed > 0.001){
+			currentForwardSpeed = Mathf.Lerp(currentForwardSpeed, 0, haltSpeed);
 			yield return new WaitForFixedUpdate();
 		}
 
-		ForwardSpeed = 0;
+		currentForwardSpeed = 0;
 
 		//yield return new WaitForSeconds(0.33f);
 		SendMessageUpwards("HandleSugarCubeCrash");
@@ -151,12 +153,28 @@ public class PlayerController : MonoBehaviour {
 		yield return null;
 	}
 
-	// Use this for initialization
-	public void Reset () {
+	public void Reset (int numLanes) {
+
+		NumLanes = numLanes;
+
+		if (!shape){
+			shape = GetComponentInChildren<ShapeGenerator>();
+		}
+		
+		shape.Reset();
+
+		shape.transform.rotation = Quaternion.identity;
+
 		InitLanes();
-		transform.position = new Vector3(lanesX[currentLaneIndex], transform.position.y, transform.position.z);
-		Shape = transform.Find("Shape");
-		transform.position = new Vector3(0,0,-20f);
+
+		currentLaneIndex = lanesX.Length / 2;
+
+		transform.position = new Vector3(lanesX[currentLaneIndex], transform.position.y, -25f);
+
+		IsHorizontalMoveInProgress = false;
+		IsRotationInProgress = false;
+		CanMove = true;
+		currentForwardSpeed = ForwardSpeed;
 	}
 	
 	// Update is called once per frame

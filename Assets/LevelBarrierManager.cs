@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelBarrierManager : MonoBehaviour {
 
-	public int NumLanes;
+	int NumLanes;
 
 	public int Speed;
 
@@ -19,20 +19,43 @@ public class LevelBarrierManager : MonoBehaviour {
 	private Queue<BarrierController> barrierManagersQueue;
 
 	// Use this for initialization
-	void Start () {
+	public void Reset(int numLanes) {
+
+		NumLanes = numLanes;
+
+		Debug.Log("LevelBarrierManager.Reset");
+
 		player = GameObject.FindWithTag("Player");
 
+		currentBarrierZ = 0;
+		nextBarrierZ = 0;
+
+		
+
 		InitBarriers();
+		LoadNextBarrier();
+		LoadNextBarrier();
 	}
+
+	public void SetNumLanes(int numLanes){
+		foreach (var item in barrierControllers)
+		{
+			item.SetNumLanes(numLanes);
+		}
+	}
+
+	BarrierController[] barrierControllers;
 
 	void InitBarriers(){
 
-		var barrierControllers = GetComponentsInChildren<BarrierController>();
+		barrierControllers = GetComponentsInChildren<BarrierController>();
 
 		barrierManagersQueue = new Queue<BarrierController>(barrierControllers.Length);
 
 		for (int i = 0; i < barrierControllers.Length; i++)
 		{
+			barrierControllers[i].Reset(NumLanes);
+
 			barrierControllers[i]
 				.transform
 				.ActivateGameObject()

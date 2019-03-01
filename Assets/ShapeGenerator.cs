@@ -25,6 +25,30 @@ public class ShapeGenerator : MonoBehaviour {
 		Cubes[8] = transform.Find("Cubes/Cube_9").gameObject;
 	}
 
+	public void Reset(){
+		for (int i=0; i<9; i++){
+			Cubes[i].transform.SetParent(transform.GetChild(0));
+			Cubes[i].transform.localPosition = Vector3.zero;
+			Cubes[i].transform.localRotation = Quaternion.identity;
+
+			var rb = Cubes[i].GetComponent<Rigidbody>();
+			rb.isKinematic = true;
+			rb.useGravity = false;
+		}
+
+		Cubes[0].transform.localPosition = new Vector3(-0.5f, 0.5f, 0);
+		Cubes[1].transform.localPosition = new Vector3( 0f,   0.5f, 0);
+		Cubes[2].transform.localPosition = new Vector3( 0.5f, 0.5f, 0);
+		
+		Cubes[3].transform.localPosition = new Vector3(-0.5f, 0, 0);
+		Cubes[4].transform.localPosition = new Vector3( 0f,   0, 0);
+		Cubes[5].transform.localPosition = new Vector3( 0.5f, 0, 0);
+		
+		Cubes[6].transform.localPosition = new Vector3(-0.5f, -0.5f, 0);
+		Cubes[7].transform.localPosition = new Vector3( 0f,   -0.5f, 0);
+		Cubes[8].transform.localPosition = new Vector3( 0.5f, -0.5f, 0);
+	}
+
 	public void FormShape(int shapeIndex){
 		for (int i=0; i<9; i++){
 			Cubes[i].SetActive(Shape.List[shapeIndex].Matrix[i] > 0);
@@ -50,6 +74,13 @@ public class ShapeGenerator : MonoBehaviour {
 		}
 	}
 	
+	public void ParentCubes(){
+		for (int i=0; i<9; i++){
+			Cubes[i].transform.SetParent(transform);
+			
+		}
+	}
+
 	void OnGUI(){
 		if (NeedsGenerating){
 			NeedsGenerating = false;
