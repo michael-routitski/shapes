@@ -5,8 +5,9 @@ using UnityEngine;
 public class LevelController : MonoBehaviour {
 
     const int BLOCKS_PER_LEVEL = 2;
+    const int BLOCKS_PER_STAGE = 10;
 
-    const int INIT_NUM_LANES = 5;
+    const int INIT_NUM_LANES = 2;
     const int MAX_NUM_LANES = 8;
 
     private LevelUIManager UI = null;
@@ -15,7 +16,7 @@ public class LevelController : MonoBehaviour {
 
     int NumLanes = INIT_NUM_LANES;
 
-    int CurrentBlocksRemaining = 10;
+    //int CurrentBlocksRemaining = 10;
 
     int BlocksTotal = 10;
 
@@ -40,9 +41,9 @@ public class LevelController : MonoBehaviour {
         barriers = GetComponent<LevelBarrierManager>();
 
         NumLanes = INIT_NUM_LANES;
-        CurrentScore = 0;
+        CurrentScore = -1; // -1 cause the first pass is triggered before any actuall pass, in the collider preceeding the barrier.
         CurrentLevel = 1;
-        CurrentBlocksRemaining = BLOCKS_PER_LEVEL;
+        //CurrentBlocksRemaining = BLOCKS_PER_LEVEL;
 
         player.Reset(NumLanes);
 
@@ -56,21 +57,31 @@ public class LevelController : MonoBehaviour {
     public void HandleSugarCubePass() {
         
         CurrentScore++;
-        CurrentBlocksRemaining--;
-        if (CurrentBlocksRemaining <= 0){
-            CurrentLevel++;
-            CurrentBlocksRemaining = BLOCKS_PER_LEVEL;
+        //CurrentBlocksRemaining--;
+        if (CurrentScore > 0 && CurrentScore % BLOCKS_PER_LEVEL == 0){
+            
+            if (CurrentScore % (BLOCKS_PER_LEVEL * BLOCKS_PER_STAGE) == 0){
 
-            if (NumLanes < MAX_NUM_LANES){
+                if (NumLanes < MAX_NUM_LANES){
                 NumLanes++;
+                }
+                else{
+                    NumLanes = INIT_NUM_LANES;
+                }
+
+                player.Reset(NumLanes);
+
+                player.ResetForwardSpeed();
+
+                barriers.Reset(NumLanes);
+
             }
             else{
-                NumLanes = INIT_NUM_LANES;
+                player.IncreaseForwardSpeed();
             }
+            
 
-            player.Reset(NumLanes);
-
-            barriers.Reset(NumLanes);
+            CurrentLevel++;
         }
 
         UpdateUI();
@@ -84,7 +95,7 @@ public class LevelController : MonoBehaviour {
 
         UI.SetTotal(BlocksTotal);
         UI.SetLevel(CurrentLevel);
-        UI.SetProgress(CurrentBlocksRemaining);
+        UI.SetProgress(BLOCKS_PER_LEVEL - CurrentLevel % BLOCKS_PER_LEVEL);
         UI.SetScore(CurrentScore);
     }
 

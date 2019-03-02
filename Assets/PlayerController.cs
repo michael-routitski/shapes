@@ -6,13 +6,13 @@ public class PlayerController : MonoBehaviour {
 
  	int NumLanes;
 
-	public float ForwardSpeed;
+	public float InitialForwardSpeed;
 
-	float currentForwardSpeed;
+	public float currentForwardSpeed;
 
 	float[] lanesX;
 
-	const float BlockWidth = 2f;
+	const float BlockWidth = 2.4f;
 
 	int currentLaneIndex = 0;
 
@@ -174,9 +174,17 @@ public class PlayerController : MonoBehaviour {
 		IsHorizontalMoveInProgress = false;
 		IsRotationInProgress = false;
 		CanMove = true;
-		currentForwardSpeed = ForwardSpeed;
+		currentForwardSpeed = InitialForwardSpeed;
 	}
-	
+
+	public void IncreaseForwardSpeed(){
+		currentForwardSpeed = currentForwardSpeed * 1.1f;
+	}
+
+	public void ResetForwardSpeed(){
+		currentForwardSpeed = this.InitialForwardSpeed;
+	}
+
 	// Update is called once per frame
 	void FixedUpdate () {
 

@@ -14,6 +14,8 @@ public class LevelBarrierManager : MonoBehaviour {
 	
 	public float nextBarrierZ = 0;
 
+	public Material[] ChocolateMaterials;
+
 	private GameObject player;
 
 	private Queue<BarrierController> barrierManagersQueue;

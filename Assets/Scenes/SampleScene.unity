@@ -156,6 +156,11 @@ Prefab:
       propertyPath: m_Name
       value: Barrier (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114920514857930034, guid: b0bca48b60be44bd9b9cd003e67d0a1c,
+        type: 2}
+      propertyPath: NumLanes
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bca48b60be44bd9b9cd003e67d0a1c, type: 2}
   m_IsPrefabAsset: 0
@@ -904,6 +909,11 @@ Prefab:
     - target: {fileID: 1208569952556318, guid: b0bca48b60be44bd9b9cd003e67d0a1c, type: 2}
       propertyPath: m_Name
       value: Barrier (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114920514857930034, guid: b0bca48b60be44bd9b9cd003e67d0a1c,
+        type: 2}
+      propertyPath: NumLanes
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bca48b60be44bd9b9cd003e67d0a1c, type: 2}
@@ -1746,6 +1756,51 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23588723718286456, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23005873803051852, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23187373858886284, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23471514895238520, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23903742862606154, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23573393373925482, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23532575576591660, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23308565102087606, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
+    - target: {fileID: 23560439041786584, guid: ca3c3044741a44e7dbd8a2addebe01f1,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18b190d672a974ad097fe98afcd24b1b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca3c3044741a44e7dbd8a2addebe01f1, type: 2}
   m_IsPrefabAsset: 0
@@ -2045,7 +2100,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1957829776}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -24.75}
+  m_LocalPosition: {x: 0, y: 0, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1174267432}
@@ -2063,8 +2118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d546b9f0078428ebd1f89361dd0502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumLanes: 3
-  ForwardSpeed: 0.1
+  InitialForwardSpeed: 0.1
+  currentForwardSpeed: 0
   InputH: 0
   InputV: 0
   IsHorizontalMoveInProgress: 0
@@ -2158,7 +2213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9095b2529784ca39f650b8653c9b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumLanes: 0
   Speed: 0
   StepSpanLength: 25
   currentBarrierZ: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BarrierGenerator : MonoBehaviour {
 
-	const float BlockWidth = 2f;
+	const float BlockWidth = 2.4f;
 
 	int NumLanes;
 
@@ -18,12 +18,19 @@ public class BarrierGenerator : MonoBehaviour {
 
 	private Transform HolesParent;
 
+	Material material;
+
 	// Use this for initialization
 	public void Reset (int numLanes) {
 		SetNumLanes(numLanes);
 		InitCache();
 		HolesParent = transform.Find("Holes");
 		ShapeIndexSelector = new int[NumLanes];
+	}
+
+	public void SetMaterial(Material value)
+	{
+		this.material = value;
 	}
 
 	public void SetNumLanes(int lanes){
@@ -65,8 +72,7 @@ public class BarrierGenerator : MonoBehaviour {
 			ShapeIndexSelector[laneIndex] = holeShapeIndex;
 		}
 
-		RamdomShapeIndex = ShapeIndexSelector[Random.Range(0, ShapeIndexSelector.Length - 1)];
-
+		RamdomShapeIndex = ShapeIndexSelector[Random.Range(0, ShapeIndexSelector.Length)];
 	}
 
 	int GetNextRandomOrdinal(){
@@ -129,5 +135,4 @@ public class BarrierGenerator : MonoBehaviour {
 			}
 		}
 	}
-
 }
