@@ -14,10 +14,6 @@ public class PlayerController : MonoBehaviour {
 
 	const float BlockWidth = 2.4f;
 
-	int currentLaneIndex = 0;
-
-	int targetLaneIndex = 0;
-
 	public float InputH;
 
 	public float InputV;
@@ -25,6 +21,12 @@ public class PlayerController : MonoBehaviour {
 	public bool IsHorizontalMoveInProgress = false;
 
 	public bool IsRotationInProgress = false;
+
+	float NumHorizontalSteps = 12f;
+
+	int currentLaneIndex = 0;
+
+	int targetLaneIndex = 0;
 
 	bool CanMove = true;
 
@@ -73,6 +75,8 @@ public class PlayerController : MonoBehaviour {
 			yield return new WaitForFixedUpdate();
 		}
 		
+		yield return new WaitForFixedUpdate();
+
 		IsRotationInProgress = false;
 
 		yield return null;
@@ -103,8 +107,6 @@ public class PlayerController : MonoBehaviour {
 
 		StartCoroutine(MoveXCR(false));
 	}
-
-	public float NumHorizontalSteps = 20f;
 
 	IEnumerator MoveXCR(bool left){
 
@@ -146,6 +148,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		currentForwardSpeed = 0;
+
+		yield return new WaitForSeconds(1);
 
 		//yield return new WaitForSeconds(0.33f);
 		SendMessageUpwards("HandleSugarCubeCrash");
@@ -194,14 +198,14 @@ public class PlayerController : MonoBehaviour {
 		MoveForward();
 
 		if (!IsHorizontalMoveInProgress){
-			if (InputH > 0f)
+			if (InputH > 0.01f)
 				MoveRight();
-			else if (InputH < 0)
+			else if (InputH < -0.01f)
 				MoveLeft();
 		}
 
 		if (!IsRotationInProgress){
-			if (InputV > 0)
+			if (InputV > 0.05f)
 				Rotate();
 		}
 	}

@@ -48,6 +48,8 @@ public class LevelBarrierManager : MonoBehaviour {
 
 	BarrierController[] barrierControllers;
 
+	//public Material[] Materials;
+
 	void InitBarriers(){
 
 		barrierControllers = GetComponentsInChildren<BarrierController>();
@@ -63,7 +65,7 @@ public class LevelBarrierManager : MonoBehaviour {
 				.ActivateGameObject()
 				.SetZ(0);
 			
-			barrierControllers[i].Regenerate(StepSpanLength);
+			barrierControllers[i].Regenerate(StepSpanLength, ChocolateMaterials[Random.Range(0,ChocolateMaterials.Length)]);
 
 			barrierManagersQueue.Enqueue(barrierControllers[i]);
 		}
@@ -71,12 +73,14 @@ public class LevelBarrierManager : MonoBehaviour {
 
 	void LoadNextBarrier(){
 
+			
+
 		currentBarrierZ = nextBarrierZ;
 		nextBarrierZ = currentBarrierZ + StepSpanLength;
 
 		var barrierController = barrierManagersQueue.Dequeue();
 
-		barrierController.Regenerate(StepSpanLength);
+		barrierController.Regenerate(StepSpanLength, ChocolateMaterials[Random.Range(0,ChocolateMaterials.Length)]);
 		barrierController.transform.SetZ(nextBarrierZ);
 
 		barrierManagersQueue.Enqueue(barrierController);

@@ -29,9 +29,9 @@ public class BarrierController : MonoBehaviour {
 		}
 	}
 	
-	public void Regenerate(float stepSpanLength){
+	public void Regenerate(float stepSpanLength, Material material){
 
-		generator.Generate();
+		generator.Generate(material);
 
 		// Get this for player shape regen
 		RandomShapeIndex = generator.RamdomShapeIndex;

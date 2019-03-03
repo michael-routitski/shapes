@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class BarrierGenerator : MonoBehaviour {
 
+	// static BarrierGenerator(){
+	// 	Materials = new Material[]{
+	// 		Resources.Load<Material>("Holes/chocolate_dark"),
+	// 		Resources.Load<Material>("Holes/chocolate_milk"),
+	// 		Resources.Load<Material>("Holes/chocolate_white")
+	// 	};
+	// }
+
 	const float BlockWidth = 2.4f;
+
+	//static Material[] Materials;
 
 	int NumLanes;
 
@@ -39,17 +49,21 @@ public class BarrierGenerator : MonoBehaviour {
 
 	public int RamdomShapeIndex = -1;
 
-	public int RandomRotationIndex = 0;
+	//public int RandomRotationIndex = 0;
+
+	private int materialIndex;
 
 	private int[] ShapeIndexSelector;
 
-	public void Generate(){
+	public void Generate(Material material){
 
 		Release();
 
 		int holeShapeIndex = 0;
 
-		RandomRotationIndex = Random.Range(0,3);
+		//RandomRotationIndex = Random.Range(0,3);
+
+		//materialIndex = Random.Range(0,3);
 
 		List<int> availableHoleShapeIndexes = new List<int>(Shape.List.Length);
 		for (int i = 0; i < Shape.List.Length; i++)
@@ -67,7 +81,9 @@ public class BarrierGenerator : MonoBehaviour {
 			holeT.ActivateGameObject();
 			holeT.SetX(GetXFor(laneIndex));
 			
-			holeT.RotateZ(90f * RandomRotationIndex);
+			holeT.RotateZ(90f * Random.Range(0,3));
+
+			holeT.GetComponentInChildren<MeshRenderer>().sharedMaterial = material;
 
 			ShapeIndexSelector[laneIndex] = holeShapeIndex;
 		}
