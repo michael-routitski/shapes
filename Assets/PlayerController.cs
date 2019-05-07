@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 			yield return new WaitForFixedUpdate();
 		}
 		
-		yield return new WaitForFixedUpdate();
+		//yield return new WaitForFixedUpdate();
 
 		IsRotationInProgress = false;
 
@@ -198,15 +198,17 @@ public class PlayerController : MonoBehaviour {
 		MoveForward();
 
 		if (!IsHorizontalMoveInProgress){
-			if (InputH > 0.01f)
+			if (InputH > 0.05f)
 				MoveRight();
-			else if (InputH < -0.01f)
+			else if (InputH < -0.05f)
 				MoveLeft();
 		}
 
 		if (!IsRotationInProgress){
-			if (InputV > 0.05f)
+			if (InputV > 0.2f){
+				IsRotationInProgress = true;
 				Rotate();
+			}
 		}
 	}
 }

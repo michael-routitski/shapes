@@ -46,7 +46,7 @@ public class MenuController : MonoBehaviour {
         }
 
         if (score.HasValue){
-            if (indexOfScoreOnLedderboard < 10){
+            if (indexOfScoreOnLedderboard >= 0 && indexOfScoreOnLedderboard < 10){
                 TileRenderers[indexOfScoreOnLedderboard].sharedMaterial = NewScoreMaterial;
             }
         }
