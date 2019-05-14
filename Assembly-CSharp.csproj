@@ -60,6 +60,8 @@
      <Compile Include="Assets\LevelController.cs" />
      <Compile Include="Assets\LevelUIManager.cs" />
      <Compile Include="Assets\MenuController.cs" />
+     <Compile Include="Assets\NumberGenerator.cs" />
+     <Compile Include="Assets\NumberManager.cs" />
      <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\Scrips\CameraFollow.cs" />
      <Compile Include="Assets\Scrips\Game.cs" />
