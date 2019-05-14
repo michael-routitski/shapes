@@ -8,6 +8,8 @@ public class NumberManager : MonoBehaviour {
 
 	public GameObject[][] Digits;
 
+	public MeshRenderer[][] DigitsRenderers;
+
 	public string Value;
 
 	private string _prevValue;
@@ -16,18 +18,23 @@ public class NumberManager : MonoBehaviour {
 
 	public bool NeedsGenerating;
 
+	int MAX_LENGTH = 4;
+
 	// Use this for initialization
 	void Start () {
 
 		InstantiateTemplates();
+		Generate();
 	}
 	
 	void InstantiateTemplates(){
 
-		Digits = new GameObject[4][];
+		Digits = new GameObject[MAX_LENGTH][];
+		DigitsRenderers = new MeshRenderer[MAX_LENGTH][];
 
-		for (int digitIndex = 0; digitIndex < 4; digitIndex++){
+		for (int digitIndex = 0; digitIndex < MAX_LENGTH; digitIndex++){
 			Digits[digitIndex] = new GameObject[10];
+			DigitsRenderers[digitIndex] = new MeshRenderer[10];
 			for (var i = 0; i < Templates.Length; i++){
 				InstantiateTemplateDigit(digitIndex, i);
 			}
@@ -37,16 +44,19 @@ public class NumberManager : MonoBehaviour {
 	void InstantiateTemplateDigit(int numberIndex, int i){
 
 		Digits[numberIndex][i] = GameObject.Instantiate(Templates[i]);
-		Digits[numberIndex][i].SetActive(false);
+		
 		Digits[numberIndex][i].transform.SetParent(transform);
-		Digits[numberIndex][i].transform.SetX(numberIndex * Spacing);
-	}
+		
+		Digits[numberIndex][i].transform.localPosition = new Vector3(
+			-numberIndex * Spacing, 
+			Templates[i].transform.localPosition.y, 
+			0);
+		
+		Digits[numberIndex][i].name = string.Format("Digit_{0}_{1}", numberIndex, i);
+		
+		DigitsRenderers[numberIndex][i] = Digits[numberIndex][i].GetComponent<MeshRenderer>();
 
-	void OnGUI(){
-		if (NeedsGenerating){
-			NeedsGenerating = false;
-			Generate();
-		}
+		DigitsRenderers[numberIndex][i].enabled = false;
 	}
 
 	void Update () {
@@ -61,7 +71,15 @@ public class NumberManager : MonoBehaviour {
 
 		int digit;
 
-		for (int digitIndex = 0; digitIndex < 4; digitIndex++){
+		HideAllDigits();
+
+		// Validate that the value is integer
+		int res = 0;
+		if (!int.TryParse(Value, out res)){
+			return;
+		}
+
+		for (int digitIndex = 0; digitIndex < MAX_LENGTH; digitIndex++){
 			if (Value.Length > digitIndex){
 				digit = int.Parse(Value[digitIndex].ToString());
 				ShowDigit(digitIndex, digit);
@@ -73,16 +91,16 @@ public class NumberManager : MonoBehaviour {
 	}
 
 	void HideAllDigits(){
-		for (int digitIndex = 0; digitIndex < 4; digitIndex++){
-			for (int digit = 0; digit < 4; digit++){
-				Digits[digitIndex][digit].SetActive(false);
+		for (int digitIndex = 0; digitIndex < MAX_LENGTH; digitIndex++){
+			for (int digit = 0; digit < 10; digit++){
+				DigitsRenderers[digitIndex][digit].enabled = false;
 			}
 		}
 	}
 
 	void ShowDigit(int digitIndex, int? digit){
 		if (digit.HasValue){
-			Digits[digitIndex][digit.Value].SetActive(true);
+			DigitsRenderers[digitIndex][digit.Value].enabled = true;
 		}
 	}
 }
