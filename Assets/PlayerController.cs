@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 
 	public float InitialForwardSpeed;
 
+	public float SpeedIncreaseFactor;
+
 	public float currentForwardSpeed;
 
 	float[] lanesX;
@@ -182,7 +184,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void IncreaseForwardSpeed(){
-		currentForwardSpeed = currentForwardSpeed * 1.1f;
+		currentForwardSpeed = currentForwardSpeed * SpeedIncreaseFactor;
 	}
 
 	public void ResetForwardSpeed(){

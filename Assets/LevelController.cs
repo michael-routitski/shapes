@@ -10,7 +10,7 @@ public class LevelController : MonoBehaviour {
     const int INIT_NUM_LANES = 2;
     const int MAX_NUM_LANES = 8;
 
-    private LevelUIManager UI = null;
+    private LevelHUDManager UI = null;
 
     int CurrentLevel = 1;
 
@@ -35,7 +35,7 @@ public class LevelController : MonoBehaviour {
     }
 
     public void StartLevel(){
-        UI = GetComponentInChildren<LevelUIManager>(true);
+        UI = GetComponentInChildren<LevelHUDManager>(true);
         cameraFollow = GetComponentInChildren<CameraFollow>(true);
         player = GetComponentInChildren<PlayerController>(true);
         barriers = GetComponent<LevelBarrierManager>();
@@ -93,9 +93,9 @@ public class LevelController : MonoBehaviour {
     
     void UpdateUI(){
 
-        UI.SetTotal(BlocksTotal);
+        //UI.SetTotal(BlocksTotal);
         UI.SetLevel(CurrentLevel);
-        UI.SetProgress(BLOCKS_PER_LEVEL - CurrentLevel % BLOCKS_PER_LEVEL);
+        //UI.SetProgress(BLOCKS_PER_LEVEL - CurrentLevel % BLOCKS_PER_LEVEL);
         UI.SetScore(CurrentScore);
     }
 

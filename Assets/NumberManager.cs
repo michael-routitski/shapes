@@ -48,10 +48,12 @@ public class NumberManager : MonoBehaviour {
 		Digits[numberIndex][i].transform.SetParent(transform);
 		
 		Digits[numberIndex][i].transform.localPosition = new Vector3(
-			-numberIndex * Spacing, 
+			numberIndex * Spacing, 
 			Templates[i].transform.localPosition.y, 
 			0);
 		
+		Digits[numberIndex][i].transform.localScale = Vector3.one;
+
 		Digits[numberIndex][i].name = string.Format("Digit_{0}_{1}", numberIndex, i);
 		
 		DigitsRenderers[numberIndex][i] = Digits[numberIndex][i].GetComponent<MeshRenderer>();
@@ -69,20 +71,28 @@ public class NumberManager : MonoBehaviour {
 
 	void Generate(){
 
-		int digit;
+		int digit; 
 
 		HideAllDigits();
 
 		// Validate that the value is integer
 		int res = 0;
-		if (!int.TryParse(Value, out res)){
+		if (Value == null || 
+			Value.Length == 0 || 
+			!int.TryParse(Value, out res)){
+
 			return;
 		}
 
 		for (int digitIndex = 0; digitIndex < MAX_LENGTH; digitIndex++){
 			if (Value.Length > digitIndex){
-				digit = int.Parse(Value[digitIndex].ToString());
-				ShowDigit(digitIndex, digit);
+
+				if (int.TryParse(Value[digitIndex].ToString(), out digit)){
+					ShowDigit(digitIndex, digit);
+				}
+				else {
+					ShowDigit(digitIndex, null);
+				}
 			}
 			else {
 				ShowDigit(digitIndex, null);

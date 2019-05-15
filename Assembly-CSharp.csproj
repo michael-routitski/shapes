@@ -58,6 +58,7 @@
      <Compile Include="Assets\BarrierGenerator.cs" />
      <Compile Include="Assets\LevelBarrierManager.cs" />
      <Compile Include="Assets\LevelController.cs" />
+     <Compile Include="Assets\LevelHUDManager.cs" />
      <Compile Include="Assets\LevelUIManager.cs" />
      <Compile Include="Assets\MenuController.cs" />
      <Compile Include="Assets\NumberGenerator.cs" />
