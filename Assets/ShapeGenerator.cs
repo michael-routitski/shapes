@@ -12,6 +12,8 @@ public class ShapeGenerator : MonoBehaviour {
 
 	public GameObject[] Cubes;
 
+	public ParticleSystem[] Particles;
+
 	void LoadCubes(){
 		Cubes = new GameObject[9];
 		Cubes[0] = transform.Find("Cubes/Cube_1").gameObject;
@@ -25,6 +27,10 @@ public class ShapeGenerator : MonoBehaviour {
 		Cubes[8] = transform.Find("Cubes/Cube_9").gameObject;
 	}
 
+	void LoadParticles(){
+		Particles = GetComponentsInChildren<ParticleSystem>();
+	}
+
 	public void Reset(){
 		for (int i=0; i<9; i++){
 			Cubes[i].transform.SetParent(transform.GetChild(0));
@@ -34,6 +40,8 @@ public class ShapeGenerator : MonoBehaviour {
 			var rb = Cubes[i].GetComponent<Rigidbody>();
 			rb.isKinematic = true;
 			rb.useGravity = false;
+
+			Particles[i].Play();
 		}
 
 		Cubes[0].transform.localPosition = new Vector3(-0.5f, 0.5f, 0);
@@ -59,6 +67,7 @@ public class ShapeGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		LoadCubes();
+		LoadParticles();
 	}
 	
 	public void DeparentCubes(float forceForward){
@@ -74,6 +83,12 @@ public class ShapeGenerator : MonoBehaviour {
 		}
 	}
 	
+	public void StopParticleSystem(){
+		for (int i=0; i<9; i++){
+			Particles[i].Stop();
+		}
+	}
+
 	public void ParentCubes(){
 		for (int i=0; i<9; i++){
 			Cubes[i].transform.SetParent(transform);

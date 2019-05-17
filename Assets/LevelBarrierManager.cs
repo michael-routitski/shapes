@@ -37,6 +37,7 @@ public class LevelBarrierManager : MonoBehaviour {
 		InitBarriers();
 		LoadNextBarrier();
 		LoadNextBarrier();
+		LoadNextBarrier();
 	}
 
 	public void SetNumLanes(int numLanes){
@@ -89,7 +90,7 @@ public class LevelBarrierManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (player.transform.position.z > currentBarrierZ){
+		if (player.transform.position.z > currentBarrierZ - StepSpanLength){
 			LoadNextBarrier();
 		}
 	}

@@ -140,7 +140,9 @@ public class PlayerController : MonoBehaviour {
 
 	IEnumerator BarrierHitCR(){
 
-		GetComponentInChildren<ShapeGenerator>().DeparentCubes(50f);
+		var shapeGen = GetComponentInChildren<ShapeGenerator>();
+		shapeGen.DeparentCubes(50f);
+		shapeGen.StopParticleSystem();
 
 		float haltSpeed = Random.Range(0.1f, 0.18f);
 
